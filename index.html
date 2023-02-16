@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js" defer></script>
     <title>Mesto</title>
   </head>
   <body class="page">
@@ -13,8 +14,89 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img class="profile__image" src="./images/image.jpg" src="Аватар" />
+        <img class="profile__image" src="./images/photo-1676083266862-8df061a7ad72-2.webp" src="Аватар" />
+        <div class="profile__info">
+          <div class="profile__initials">
+            <h1 class="profile__name">Линь Джу</h1>
+            <button class="profile__edit-button" type="button"></button>
+          </div>
+          <p class="profile__description">Исследовательница</p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+      <section class="places">
+        <article class="place">
+          <img
+            class="place__image"
+            src="./images/anita-austvika-t6S8rFRUKL8-unsplash.jpg"
+            alt="Собака сидящая на подводящей к дому лестнице. Дом бежевого оттенка с решётками на окнах." />
+          <div class="place__description">
+            <h2 class="place__title">Тавира, Алгарве, Португалия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <article class="place">
+          <img class="place__image" src="./images/photo-1486373645914-e93b96470634.webp" alt="Заброшенное здание с испорченной дверью." />
+          <div class="place__description">
+            <h2 class="place__title">Лиссабон, Португалия</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <article class="place">
+          <img
+            class="place__image"
+            src="./images/photo-1675841284904-4020e17c1509.webp"
+            alt="Магазин с тремя холодильниками, в которых стоят напитки, слева касса, справа стелам с товаром." />
+          <div class="place__description">
+            <h2 class="place__title">Флинт, Соединенные Штаты</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <article class="place">
+          <img
+            class="place__image"
+            src="./images/photo-1675266411043-5c5765e6e75e.webp"
+            alt="Горшки, наполненные водой.  На заднем фоне здания желто-белого оттенка." />
+          <div class="place__description">
+            <h2 class="place__title">Фес, Марокко</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <article class="place">
+          <img
+            class="place__image"
+            src="./images/raphael-lopes-ta8lZodCMZs-unsplash.jpg"
+            alt="Ярко выделенная надпись на японском языке, напротив которой идут два человека." />
+          <div class="place__description">
+            <h2 class="place__title">Синдзюку, Токио, Япония</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
+        <article class="place">
+          <img
+            class="place__image"
+            src="./images/sekwang-chia-ytz8lNsxzd8-unsplash-2.jpg"
+            alt="Автомагистраль с фоном в виде горным массивов и елового леса." />
+          <div class="place__description">
+            <h2 class="place__title">Джаспер, Авеню, Канада</h2>
+            <button class="place__like-button"></button>
+          </div>
+        </article>
       </section>
     </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+    <div class="pop-up">
+      <form class="pop-up__form">
+        <fieldset class="pop-up__info">
+          <legend class="pop-up__title">Редактировать профиль</legend>
+          <input class="pop-up__name" type="text" name="name" value="" placeholder="Имя" />
+          <input class="pop-up__description" type="text" name="description" value="" placeholder="О себе" />
+        </fieldset>
+        <button class="pop-up__save-button" type="submit">Сохранить</button>
+      </form>
+      <button class="pop-up__close-button"></button>
+    </div>
   </body>
 </html>

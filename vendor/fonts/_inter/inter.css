@@ -24,6 +24,18 @@
 
 @font-face {
   font-family: "inter";
+  src: url("./Inter-Medium.woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "inter";
+  src: url("./Inter-Medium.woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "inter";
   src: url("../_inter/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
 }
