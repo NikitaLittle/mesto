@@ -1,0 +1,15 @@
+.profile__edit-button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: url("../../../images/Vector.svg") no-repeat;
+  background-size: 10px;
+  background-position: center;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.profile__edit-button:hover {
+  background-image: url("../../../images/Vector\ —\ копия\ 4.svg");
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}

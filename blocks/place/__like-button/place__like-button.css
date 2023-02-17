@@ -1,0 +1,14 @@
+.place__like-button {
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  background: url("../../../images/Vector\ —\ копия\ 2.svg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.place__like-button:hover {
+  background-image: url("../../../images/Vector\ —\ копия\ 3.svg");
+}
