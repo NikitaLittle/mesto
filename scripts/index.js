@@ -1,28 +1,32 @@
 let profileName = document.querySelector(".profile__name");
 let profileEditButton = document.querySelector(".profile__edit-button");
 let profileDescription = document.querySelector(".profile__description");
-let popUp = document.querySelector(".pop-up");
-let popUpForm = popUp.querySelector(".pop-up__form");
-let popUpName = popUp.querySelector(".pop-up__name");
-let popUpDescription = popUp.querySelector(".pop-up__description");
-let popUpSaveButton = popUp.querySelector(".pop-up__save-button");
-let popUpCloseButton = popUp.querySelector(".pop-up__close-button");
+let popUp = document.querySelector(".popup");
+let popUpForm = popUp.querySelector(".popup__form");
+let popUpName = popUp.querySelector(".popup__input_field_name");
+let popUpDescription = popUp.querySelector(".popup__input_field_description");
+let popUpCloseButton = popUp.querySelector(".popup__close-button");
 
-profileEditButton.addEventListener("click", function () {
+// Открытие попапа с исходными данными пользователя
+function popUpOpening() {
   popUpName.value = profileName.textContent;
   popUpDescription.value = profileDescription.textContent;
-  popUp.classList.add("pop-up_opened");
-});
-
-function popUpClose() {
-  popUp.classList.remove("pop-up_opened");
+  popUp.classList.add("popup_opened");
 }
-popUpCloseButton.addEventListener("click", popUpClose);
 
+// Закрытие попапа
+function popUpClose() {
+  popUp.classList.remove("popup_opened");
+}
+
+// Заполнение полей данными пользователя
 function handleFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = popUpName.value;
   profileDescription.textContent = popUpDescription.value;
+  popUpClose();
 }
+
+profileEditButton.addEventListener("click", popUpOpening);
+popUpCloseButton.addEventListener("click", popUpClose);
 popUpForm.addEventListener("submit", handleFormSubmit);
-popUpSaveButton.addEventListener("click", popUpClose);
