@@ -1,6 +1,7 @@
 .profile__description {
   max-width: 282px;
   margin: 16px 0 0;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

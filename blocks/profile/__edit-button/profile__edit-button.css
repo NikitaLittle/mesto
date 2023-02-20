@@ -7,6 +7,8 @@
   background-position: center;
   border: 1px solid white;
   cursor: pointer;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
   transition: 0.4s;
 }
 .profile__edit-button:hover {

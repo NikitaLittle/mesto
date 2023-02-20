@@ -11,6 +11,8 @@
   font-weight: 400;
   line-height: 22px;
   cursor: pointer;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
   transition: 0.4s;
 }
 .popup__save-button:hover {

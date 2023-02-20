@@ -1,6 +1,7 @@
 .place__title {
   max-width: 190px;
   margin: 0;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
