@@ -81,6 +81,15 @@
             <button class="place__like-button" type="button" aria-label="Нравится."></button>
           </div>
         </article>
+        <template class="place__template">
+          <article class="place">
+            <img class="place__image" src="" alt="" />
+            <div class="place__description">
+              <h2 class="place__title"></h2>
+              <button class="place__like-button" type="button" aria-label="Нравится."></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
@@ -95,10 +104,23 @@
             <input class="popup__input popup__input_field_name" type="text" name="name" value="" placeholder="Имя" required />
             <input class="popup__input popup__input_field_description" type="text" name="description" value="" placeholder="О себе" required />
           </fieldset>
-          <button class="popup__save-button" type="submit">Сохранить</button>
+          <button class="popup__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-    <script src="./scripts/index.js"></script>
+    <div class="popup popup_adding">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button" aria-label="Закрыть."></button>
+        <form class="popup__form" name="addInfo">
+          <fieldset class="popup__info">
+            <legend class="popup__title">Новое место</legend>
+            <input class="popup__input popup__input_field_title" type="text" name="name" value="" placeholder="Название" required />
+            <input class="popup__input popup__input_field_link" type="text" name="description" value="" placeholder="Ссылка на картинку" required />
+          </fieldset>
+          <button class="popup__button popup__button_create" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <script src="./scripts/index.js" defer></script>
   </body>
 </html>
