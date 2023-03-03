@@ -1,11 +1,11 @@
 const places = document.querySelector('.places');
 const placeTemplate = places.querySelector('.place__template').content;
 const addButton = document.querySelector('.profile__add-button');
-const popUpAdding = document.querySelector('.popup__adding');
+const popUpAdding = document.querySelector('.popup_adding');
 const closeButton = popUpAdding.querySelector('.popup__close-button');
 const popUpAddingTitle = popUpAdding.querySelector('.popup__input_field_title');
 const popUpAddingLink = popUpAdding.querySelector('.popup__input_field_link');
-const popUpImageContainer = document.querySelector('.popup__images');
+const popUpImageContainer = document.querySelector('.popup_images');
 
 // Закрашивание лайка
 function likeButtonPainted(evt) {
