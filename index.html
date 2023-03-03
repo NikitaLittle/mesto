@@ -24,66 +24,10 @@
         <button class="profile__add-button" type="button" aria-label="Добавить."></button>
       </section>
       <section class="places">
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/anita-austvika-t6S8rFRUKL8-unsplash.jpg"
-            alt="Собака сидит на подводящей к дому лестнице. Дом бежевого оттенка с решётками на окнах." />
-          <div class="place__description">
-            <h2 class="place__title">Тавира, Алгарве, Португалия</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
-        <article class="place">
-          <img class="place__image" src="./images/photo-1486373645914-e93b96470634.webp" alt="Заброшенное здание с испорченной дверью." />
-          <div class="place__description">
-            <h2 class="place__title">Лиссабон, Португалия</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/photo-1675841284904-4020e17c1509.webp"
-            alt="Магазин, на заднем фоне три холодильника, в которых стоят напитки, слева касса, справа стелаж с товаром." />
-          <div class="place__description">
-            <h2 class="place__title">Флинт, Соединенные Штаты</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/photo-1675266411043-5c5765e6e75e.webp"
-            alt="Горшки, наполненные водой. На заднем фоне здания желто-белого оттенка." />
-          <div class="place__description">
-            <h2 class="place__title">Фес, Марокко</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/raphael-lopes-ta8lZodCMZs-unsplash.jpg"
-            alt="Ярко выделенная надпись на японском языке, напротив которой идут два человека." />
-          <div class="place__description">
-            <h2 class="place__title">Синдзюку, Токио, Япония</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/sekwang-chia-ytz8lNsxzd8-unsplash-2.jpg"
-            alt="Автомагистраль с фоном в виде горных массивов и елового леса." />
-          <div class="place__description">
-            <h2 class="place__title">Джаспер, Авеню, Канада</h2>
-            <button class="place__like-button" type="button" aria-label="Нравится."></button>
-          </div>
-        </article>
         <template class="place__template">
           <article class="place">
             <img class="place__image" src="" alt="" />
+            <button class="place__urn-button" type="button" aria-label="Удалить."></button>
             <div class="place__description">
               <h2 class="place__title"></h2>
               <button class="place__like-button" type="button" aria-label="Нравится."></button>
@@ -108,7 +52,7 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_adding">
+    <div class="popup popup__adding-container">
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="Закрыть."></button>
         <form class="popup__form" name="addInfo">
@@ -121,6 +65,15 @@
         </form>
       </div>
     </div>
-    <script src="./scripts/index.js" defer></script>
+    <div class="popup popup__image-container">
+      <figure class="popup__figure">
+        <img class="popup__image" src="" alt="" />
+        <button class="popup__close-button" type="button"></button>
+        <figcaption class="popup__figcaption"><h3 class="popup__image-title"></h3></figcaption>
+      </figure>
+    </div>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/array.js"></script>
+    <script src="./scripts/places.js"></script>
   </body>
 </html>
