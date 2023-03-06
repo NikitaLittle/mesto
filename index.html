@@ -39,41 +39,41 @@
     <footer class="footer">
       <p class="footer__copyright">© 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup profile-popup">
       <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="Закрыть."></button>
-        <form class="popup__form" name="profileInfo">
+        <button class="popup__close-button profile-popup__close-button" type="button" aria-label="Закрыть."></button>
+        <form class="popup__form profile-popup__form" name="profileInfo">
           <fieldset class="popup__info">
             <legend class="popup__title">Редактировать профиль</legend>
-            <input class="popup__input popup__input_field_name" type="text" name="name" value="" placeholder="Имя" required />
-            <input class="popup__input popup__input_field_description" type="text" name="description" value="" placeholder="О себе" required />
+            <input class="popup__input profile-popup__input_field_name" type="text" name="name" value="" placeholder="Имя" required />
+            <input class="popup__input profile-popup__input_field_description" type="text" name="description" value="" placeholder="О себе" required />
           </fieldset>
           <button class="popup__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-    <div class="popup popup_adding">
+    <div class="popup adding-popup">
       <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="Закрыть."></button>
+        <button class="popup__close-button adding-popup__close-button" type="button" aria-label="Закрыть."></button>
         <form class="popup__form" name="addInfo">
           <fieldset class="popup__info">
             <legend class="popup__title">Новое место</legend>
-            <input class="popup__input popup__input_field_title" type="text" name="name" value="" placeholder="Название" required />
-            <input class="popup__input popup__input_field_link" type="text" name="description" value="" placeholder="Ссылка на картинку" required />
+            <input class="popup__input adding-popup__input_field_title" type="text" name="name" value="" placeholder="Название" required />
+            <input class="popup__input adding-popup__input_field_link" type="text" name="description" value="" placeholder="Ссылка на картинку" required />
           </fieldset>
-          <button class="popup__button popup__button_create" type="submit">Создать</button>
+          <button class="popup__button" type="submit">Создать</button>
         </form>
       </div>
     </div>
-    <div class="popup popup_images">
-      <figure class="popup__figure">
-        <img class="popup__image" alt="" />
-        <button class="popup__close-button" type="button"></button>
-        <figcaption class="popup__figcaption"><h3 class="popup__image-title"></h3></figcaption>
+    <div class="popup image-popup">
+      <figure class="image-popup__figure">
+        <img class="image-popup__image" alt="" />
+        <button class="popup__close-button image-popup__close-button" type="button"></button>
+        <figcaption class="image-popup__figcaption"><h3 class="image-popup__title"></h3></figcaption>
       </figure>
     </div>
-    <script src="./scripts/index.js"></script>
     <script src="./scripts/array.js"></script>
-    <script src="./scripts/places.js"></script>
+    <script src="./scripts/profile.js"></script>
+    <!-- <script src="./scripts/places.js"></script> -->
   </body>
 </html>
