@@ -1,26 +1,23 @@
-// Селекторы профиля
+// Объекты профиля
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const profileAddButton = document.querySelector('.profile__add-button');
-// Селекторы мест
+// Объекты мест
 const places = document.querySelector('.places');
 const placeTemplate = places.querySelector('.place__template').content;
-// Селекторы стд. попапа
-const popUp = document.querySelector('.popup');
-const popUpCloseButton = popUp.querySelector('.popup__close-button');
-// Селекторы профиля попапа
+// Объекты профиля попапа
 const profilePopUp = document.querySelector('.profile-popup');
 const profilePopUpCloseButton = profilePopUp.querySelector('.profile-popup__close-button');
 const profilePopUpForm = profilePopUp.querySelector('.profile-popup__form');
 const profilePopUpName = profilePopUp.querySelector('.profile-popup__input_field_name');
 const profilePopUpDescription = profilePopUp.querySelector('.profile-popup__input_field_description');
-// Селекторы "добавить" попап
+// Объекты "добавить" попап
 const addingPopUp = document.querySelector('.adding-popup');
 const addingPopUpCloseButton = addingPopUp.querySelector('.adding-popup__close-button');
 const addingInputTitle = addingPopUp.querySelector('.adding-popup__input_field_title');
 const addingInputLink = addingPopUp.querySelector('.adding-popup__input_field_link');
-// Селекторы "изображение" попап
+// Объекты "изображение" попап
 const imagePopup = document.querySelector('.image-popup');
 const imagePopupImage = imagePopup.querySelector('.image-popup__image');
 const imagePopupTitle = imagePopup.querySelector('.image-popup__title');
