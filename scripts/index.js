@@ -6,6 +6,9 @@ const profileAddButton = document.querySelector('.profile__add-button');
 // Объекты мест
 const places = document.querySelector('.places');
 const placeTemplate = places.querySelector('.place__template').content;
+// Объекты стд. попапа
+const popUpList = document.querySelectorAll('.popup');
+const popUpCloseButtonsList = document.querySelectorAll('.popup__close-button');
 // Объекты профиля попапа
 const profilePopUp = document.querySelector('.profile-popup');
 const profilePopUpCloseButton = profilePopUp.querySelector('.profile-popup__close-button');
@@ -57,15 +60,37 @@ function addInitialPlaces(item) {
 }
 initialPlaces.forEach(addInitialPlaces);
 
+// Закрытие попапа на "Escape"
+function closePopUpByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.popup_opened');
+    closePopUp(openedPopUp);
+  }
+}
+
 // Открытие попапов
 function openPopUp(popUp) {
   popUp.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopUpByEsc);
 }
 
 // Закрытие попапов
 function closePopUp(popUp) {
   popUp.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopUpByEsc);
 }
+
+// Добавление слушателей на кнопки для закрытия попапов
+popUpList.forEach(function (popUp) {
+  popUp.addEventListener('mousedown', function (evt) {
+    if (evt.target.classList.contains('popup')) {
+      closePopUp(popUp);
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopUp(popUp);
+    }
+  });
+});
 
 // Создание новых карточек
 function createNewPlace(evt) {
@@ -103,19 +128,9 @@ function deletePlace(evt) {
 profileEditButton.addEventListener('click', function () {
   openPopUp(profilePopUp);
 });
-profilePopUpCloseButton.addEventListener('click', function () {
-  closePopUp(profilePopUp);
-});
 profilePopUpForm.addEventListener('submit', handleProfileFormSubmit);
 // Слушатели "добавить" попап
 profileAddButton.addEventListener('click', function () {
   openPopUp(addingPopUp);
 });
-addingPopUpCloseButton.addEventListener('click', function () {
-  closePopUp(addingPopUp);
-});
 addingPopUp.addEventListener('submit', createNewPlace);
-// Слушатель ув. изображения попап
-imagePopupCloseButton.addEventListener('click', function () {
-  closePopUp(imagePopup);
-});

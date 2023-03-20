@@ -42,17 +42,37 @@
     <div class="popup profile-popup">
       <div class="popup__container">
         <button class="popup__close-button profile-popup__close-button" type="button" aria-label="Закрыть."></button>
-        <form class="popup__form profile-popup__form" name="profileInfo">
+        <form class="popup__form profile-popup__form" name="profileForm" novalidate>
           <fieldset class="popup__info">
             <legend class="popup__title">Редактировать профиль</legend>
-            <input class="popup__input profile-popup__input profile-popup__input_field_name" type="text" name="name" value="" placeholder="Имя" required />
-            <input
-              class="popup__input profile-popup__input profile-popup__input_field_description"
-              type="text"
-              name="description"
-              value=""
-              placeholder="О себе"
-              required />
+            <div class="popup__inputs-container">
+              <div class="popup__input-error-container">
+                <input
+                  class="popup__input profile-popup__input profile-popup__input_field_name"
+                  id="popup-input-name"
+                  type="text"
+                  name="profileNameInput"
+                  value=""
+                  placeholder="Имя"
+                  minlength="2"
+                  maxlength="40"
+                  required />
+                <span class="popup__input-error popup-input-name-error"></span>
+              </div>
+              <div class="popup__input-error-container">
+                <input
+                  class="popup__input profile-popup__input profile-popup__input_field_description"
+                  id="popup-input-description"
+                  type="text"
+                  name="profileDescriptionInput"
+                  value=""
+                  placeholder="О себе"
+                  minlength="2"
+                  maxlength="200"
+                  required />
+                <span class="popup__input-error popup-input-description-error"></span>
+              </div>
+            </div>
           </fieldset>
           <button class="popup__button" type="submit">Сохранить</button>
         </form>
@@ -61,17 +81,35 @@
     <div class="popup adding-popup">
       <div class="popup__container">
         <button class="popup__close-button adding-popup__close-button" type="button" aria-label="Закрыть."></button>
-        <form class="popup__form" name="addInfo">
+        <form class="popup__form" name="addForm" novalidate>
           <fieldset class="popup__info">
             <legend class="popup__title">Новое место</legend>
-            <input class="popup__input adding-popup__input adding-popup__input_field_title" type="text" name="name" value="" placeholder="Название" required />
-            <input
-              class="popup__input adding-popup__input adding-popup__input_field_link"
-              type="text"
-              name="description"
-              value=""
-              placeholder="Ссылка на картинку"
-              required />
+            <div class="popup__inputs-container">
+              <div class="popup__input-error-container">
+                <input
+                  class="popup__input adding-popup__input adding-popup__input_field_title"
+                  id="popup-input-place-name"
+                  type="text"
+                  name="placeNameInput"
+                  value=""
+                  placeholder="Название"
+                  minlength="2"
+                  maxlength="30"
+                  required />
+                <span class="popup__input-error popup-input-place-name-error"></span>
+              </div>
+              <div class="popup__input-error-container">
+                <input
+                  class="popup__input adding-popup__input adding-popup__input_field_link"
+                  id="popup-input-place-link"
+                  type="url"
+                  name="placeDescriptionInput"
+                  value=""
+                  placeholder="Ссылка на картинку"
+                  required />
+                <span class="popup__input-error popup-input-place-link-error"></span>
+              </div>
+            </div>
           </fieldset>
           <button class="popup__button" type="submit">Создать</button>
         </form>
@@ -84,7 +122,8 @@
         <figcaption class="image-popup__figcaption"><h3 class="image-popup__title"></h3></figcaption>
       </figure>
     </div>
-    <script src="./scripts/array.js"></script>
-    <script src="./scripts/profile.js"></script>
+    <script src="./scripts/constants.js"></script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
