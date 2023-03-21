@@ -20,6 +20,7 @@ const addingPopUp = document.querySelector('.adding-popup');
 const addingPopUpCloseButton = addingPopUp.querySelector('.adding-popup__close-button');
 const addingInputTitle = addingPopUp.querySelector('.adding-popup__input_field_title');
 const addingInputLink = addingPopUp.querySelector('.adding-popup__input_field_link');
+const addingSubmitButton = addingPopUp.querySelector('.adding-popup__button');
 // Объекты "изображение" попап
 const imagePopup = document.querySelector('.image-popup');
 const imagePopupImage = imagePopup.querySelector('.image-popup__image');
@@ -54,11 +55,11 @@ function createPlace(place) {
   return placeTemplateCopy;
 }
 
-function addInitialPlaces(item) {
+function addPlaces(item) {
   const place = createPlace(item);
   places.prepend(place);
 }
-initialPlaces.forEach(addInitialPlaces);
+initialPlaces.forEach(addPlaces);
 
 // Закрытие попапа на "Escape"
 function closePopUpByEsc(evt) {
@@ -83,10 +84,7 @@ function closePopUp(popUp) {
 // Добавление слушателей на кнопки для закрытия попапов
 popUpList.forEach(function (popUp) {
   popUp.addEventListener('mousedown', function (evt) {
-    if (evt.target.classList.contains('popup')) {
-      closePopUp(popUp);
-    }
-    if (evt.target.classList.contains('popup__close-button')) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
       closePopUp(popUp);
     }
   });
@@ -99,8 +97,9 @@ function createNewPlace(evt) {
     image: addingInputLink.value,
     title: addingInputTitle.value,
   };
-  addInitialPlaces(arrayNewPlaces);
+  addPlaces(arrayNewPlaces);
   evt.target.reset();
+  disableButton(addingSubmitButton, config);
   closePopUp(addingPopUp);
 }
 
@@ -115,7 +114,7 @@ function openPopUpImage(evt) {
   imagePopupImage.setAttribute('src', evt.target.getAttribute('src'));
   imagePopupImage.setAttribute('alt', evt.target.getAttribute('alt'));
   const place = evt.target.closest('.place');
-  imagePopupTitle.textContent = place.querySelector('.place__title').textContent;
+  imagePopupTitle.textContent = evt.target.getAttribute('alt');
 }
 
 // Удаление мест

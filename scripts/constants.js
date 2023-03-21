@@ -1,3 +1,4 @@
+// Массив изначальных мест
 const initialPlaces = [
   {
     title: 'Канада, Озеро Морейн',
@@ -30,3 +31,13 @@ const initialPlaces = [
       'https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
 ];
+
+// Селекторы и классы валидации
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};

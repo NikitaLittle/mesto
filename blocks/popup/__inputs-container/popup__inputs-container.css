@@ -1,3 +1,6 @@
 .popup__inputs-container {
-  margin: 54px 0 31px;
+  margin: 54px 0 28px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
 }

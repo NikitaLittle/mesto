@@ -23,6 +23,17 @@ function checkInputValidity(formElement, inputElement, config) {
   }
 }
 
+// Выкл. сост. кнопки
+function disableButton(buttonElement, config) {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+// Вкл. сост. кнопки
+function enableButton(buttonElement, config) {
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+}
+
 // Верни true, если поле не валидно
 function hasInvalidInput(inputList) {
   return inputList.some(function (inputElement) {
@@ -33,9 +44,9 @@ function hasInvalidInput(inputList) {
 // Измени состояние кнопки, если хотябы одно из полей true
 function toggleButtonState(inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
+    disableButton(buttonElement, config);
   } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
+    enableButton(buttonElement, config);
   }
 }
 
@@ -62,11 +73,4 @@ function enableValidation(config) {
   });
 }
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-});
+enableValidation(config);
