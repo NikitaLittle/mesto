@@ -13,4 +13,4 @@
 ## GitHub Pages: https://mazouraw.github.io/mesto/
 
 <br>
-_© Маленький Никита Денисович_
+© Маленький Никита Денисович
