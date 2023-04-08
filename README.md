@@ -11,6 +11,6 @@
 - Принципы работы с DOM с помощью нативного JavaScript.
 - ООП.
 
-## GitHub Pages: https://mazouraw.github.io/mesto/
+## GitHub Pages: https://nikitalittle.github.io/mesto/
 
 © Маленький Никита Денисович
