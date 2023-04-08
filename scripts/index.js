@@ -15,7 +15,6 @@ const places = document.querySelector('.places');
 const placeTemplate = places.querySelector('.place__template').content;
 // Объекты стд. попапа
 const popUpList = document.querySelectorAll('.popup');
-const popUpCloseButtonsList = document.querySelectorAll('.popup__close-button');
 // Объекты "профиль" попап
 const profilePopUp = document.querySelector('.profile-popup');
 const profilePopUpForm = profilePopUp.querySelector('[name="profileForm"]');
@@ -26,7 +25,6 @@ const addingPopUp = document.querySelector('.adding-popup');
 const addingPopUpForm = addingPopUp.querySelector('[name="addForm"]');
 const addingInputTitle = addingPopUp.querySelector('.adding-popup__input_field_title');
 const addingInputLink = addingPopUp.querySelector('.adding-popup__input_field_link');
-const addingSubmitButton = addingPopUp.querySelector('.adding-popup__button');
 // Объекты "изображение" попап
 const imagePopup = document.querySelector('.image-popup');
 const imagePopupImage = imagePopup.querySelector('.image-popup__image');
@@ -73,7 +71,7 @@ const addingFormValidator = new FormValidator(addingPopUpForm, config);
 
 // Добавление карточек в секцию
 initialPlaces.forEach(function (placeItem) {
-  addPlace(placeItem);
+  places.prepend(createCard(placeItem));
 });
 
 // Открытие попапов
@@ -96,9 +94,9 @@ function fillFieldsForm() {
   profilePopUpDescription.value = profileDescription.textContent;
 }
 
-function addPlace(placeItem) {
+function createCard(placeItem) {
   const placesContent = new Card(placeItem, placeTemplate, openPopUp);
-  places.prepend(placesContent.createPlace());
+  return placesContent.createPlace();
 }
 
 // Создание новых карточек
@@ -108,8 +106,8 @@ function createNewPlace(evt) {
     image: addingInputLink.value,
     name: addingInputTitle.value,
   };
-  addPlace(arrayNewPlace);
   evt.target.reset();
+  places.prepend(createCard(arrayNewPlace));
   addingFormValidator.disableButton();
   closePopUp(addingPopUp);
 }
