@@ -1,17 +1,17 @@
 import { imagePopup, imagePopupImage, imagePopupTitle } from './index.js';
 
-export class Place {
-  constructor(array, templateSelector, handleImageClick) {
-    this._image = array.image;
-    this._alt = array.title;
-    this._title = array.title;
-    this._templateSelector = templateSelector;
+export class Card {
+  constructor(array, template, handleImageClick) {
+    this._image = array.link;
+    this._alt = array.name;
+    this._title = array.name;
+    this._template = template;
     this._handleImageClick = handleImageClick;
   }
 
   // Получение шаблона
   _getTemplate() {
-    this._placeElement = this._templateSelector.querySelector('.place').cloneNode(true);
+    this._placeElement = this._template.querySelector('.place').cloneNode(true);
 
     return this._placeElement;
   }
@@ -50,6 +50,7 @@ export class Place {
   // Удаление мест
   _deletePlace() {
     this._content.remove();
+    this._content = null;
   }
 
   // Установка слушателей

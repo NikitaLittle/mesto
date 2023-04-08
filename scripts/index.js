@@ -1,5 +1,5 @@
 // Импорты классов
-import { Place } from './Place.js';
+import { Card } from './Card.js';
 import { FormValidator } from './FormValidatior.js';
 
 // Экспорты переменных
@@ -34,34 +34,28 @@ const imagePopupTitle = imagePopup.querySelector('.image-popup__title');
 // Массив изначальных мест
 const initialPlaces = [
   {
-    title: 'Канада, Озеро Морейн',
-    image:
-      'https://images.unsplash.com/photo-1677530248517-ee23fb4150ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    name: 'Канада, Озеро Морейн',
+    link: 'https://images.unsplash.com/photo-1677530248517-ee23fb4150ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
   {
-    title: 'Токио, Япония',
-    image:
-      'https://images.unsplash.com/photo-1677529461522-b2a94a2a3a08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    name: 'Токио, Япония',
+    link: 'https://images.unsplash.com/photo-1677529461522-b2a94a2a3a08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
   {
-    title: 'Живописный мост, Москва, Россия',
-    image:
-      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1333&q=80',
+    name: 'Живописный мост, Москва, Россия',
+    link: 'https://images.unsplash.com/photo-1523509433743-6f42a58221df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1333&q=80',
   },
   {
-    title: 'Накано, Токио, Япония',
-    image:
-      'https://images.unsplash.com/photo-1677350785705-1a5a0bb00587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    name: 'Накано, Токио, Япония',
+    link: 'https://images.unsplash.com/photo-1677350785705-1a5a0bb00587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
   {
-    title: 'Торонто, Канада',
-    image:
-      'https://images.unsplash.com/photo-1677253171049-8cf508015e99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    name: 'Торонто, Канада',
+    link: 'https://images.unsplash.com/photo-1677253171049-8cf508015e99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
   {
-    title: 'Москва, Россия',
-    image:
-      'https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    name: 'Москва, Россия',
+    link: 'https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
   },
 ];
 // Селекторы и классы валидации
@@ -75,12 +69,11 @@ const config = {
 };
 // Экзепляры класса валидации
 const profileFormValidator = new FormValidator(profilePopUpForm, config);
-const addFormValidator = new FormValidator(addingPopUpForm, config);
+const addingFormValidator = new FormValidator(addingPopUpForm, config);
 
 // Добавление карточек в секцию
 initialPlaces.forEach(function (placeItem) {
-  const placesContent = new Place(placeItem, placeTemplate, openPopUp);
-  places.prepend(placesContent.createPlace());
+  addPlace(placeItem);
 });
 
 // Открытие попапов
@@ -98,20 +91,26 @@ function handleProfileFormSubmit(evt) {
 }
 
 // Заполнение полей данными профиля
-profilePopUpName.value = profileName.textContent;
-profilePopUpDescription.value = profileDescription.textContent;
+function fillFieldsForm() {
+  profilePopUpName.value = profileName.textContent;
+  profilePopUpDescription.value = profileDescription.textContent;
+}
+
+function addPlace(placeItem) {
+  const placesContent = new Card(placeItem, placeTemplate, openPopUp);
+  places.prepend(placesContent.createPlace());
+}
 
 // Создание новых карточек
 function createNewPlace(evt) {
   evt.preventDefault();
-  const arrayNewPlaces = {
+  const arrayNewPlace = {
     image: addingInputLink.value,
-    title: addingInputTitle.value,
+    name: addingInputTitle.value,
   };
-  const placesContent = new Place(arrayNewPlaces, placeTemplate, openPopUp);
-  places.prepend(placesContent.createPlace());
+  addPlace(arrayNewPlace);
   evt.target.reset();
-  addFormValidator.disableButton();
+  addingFormValidator.disableButton();
   closePopUp(addingPopUp);
 }
 
@@ -141,6 +140,7 @@ function closePopUpByEsc(evt) {
 // Слушатели "профиль" попап
 profileEditButton.addEventListener('click', function () {
   openPopUp(profilePopUp);
+  fillFieldsForm();
 });
 profilePopUp.addEventListener('submit', handleProfileFormSubmit);
 
@@ -152,4 +152,4 @@ addingPopUp.addEventListener('submit', createNewPlace);
 
 // Включение валидации форм
 profileFormValidator.enableValidation();
-addFormValidator.enableValidation();
+addingFormValidator.enableValidation();
