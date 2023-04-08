@@ -5,9 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./scripts/constants.js" defer></script>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validate.js" defer></script>
     <title>Mesto</title>
   </head>
   <body class="page">
@@ -45,7 +42,7 @@
     <div class="popup profile-popup">
       <div class="popup__container">
         <button class="popup__close-button profile-popup__close-button" type="button" aria-label="Закрыть."></button>
-        <form class="popup__form profile-popup__form" name="profileForm" novalidate>
+        <form class="popup__form" name="profileForm" novalidate>
           <fieldset class="popup__info">
             <legend class="popup__title">Редактировать профиль</legend>
             <div class="popup__inputs-container">
@@ -121,5 +118,6 @@
         <figcaption class="image-popup__figcaption"><h3 class="image-popup__title"></h3></figcaption>
       </figure>
     </div>
+    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

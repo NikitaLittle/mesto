@@ -1,4 +1,11 @@
-// Объекты профиля
+// Импорты классов
+import { Place } from './Place.js';
+import { FormValidator } from './FormValidatior.js';
+
+// Экспорты переменных
+export { imagePopup, imagePopupImage, imagePopupTitle };
+
+// Объекты профиля документа
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -9,15 +16,14 @@ const placeTemplate = places.querySelector('.place__template').content;
 // Объекты стд. попапа
 const popUpList = document.querySelectorAll('.popup');
 const popUpCloseButtonsList = document.querySelectorAll('.popup__close-button');
-// Объекты профиля попапа
+// Объекты "профиль" попап
 const profilePopUp = document.querySelector('.profile-popup');
-const profilePopUpCloseButton = profilePopUp.querySelector('.profile-popup__close-button');
-const profilePopUpForm = profilePopUp.querySelector('.profile-popup__form');
+const profilePopUpForm = profilePopUp.querySelector('[name="profileForm"]');
 const profilePopUpName = profilePopUp.querySelector('.profile-popup__input_field_name');
 const profilePopUpDescription = profilePopUp.querySelector('.profile-popup__input_field_description');
 // Объекты "добавить" попап
 const addingPopUp = document.querySelector('.adding-popup');
-const addingPopUpCloseButton = addingPopUp.querySelector('.adding-popup__close-button');
+const addingPopUpForm = addingPopUp.querySelector('[name="addForm"]');
 const addingInputTitle = addingPopUp.querySelector('.adding-popup__input_field_title');
 const addingInputLink = addingPopUp.querySelector('.adding-popup__input_field_link');
 const addingSubmitButton = addingPopUp.querySelector('.adding-popup__button');
@@ -25,9 +31,65 @@ const addingSubmitButton = addingPopUp.querySelector('.adding-popup__button');
 const imagePopup = document.querySelector('.image-popup');
 const imagePopupImage = imagePopup.querySelector('.image-popup__image');
 const imagePopupTitle = imagePopup.querySelector('.image-popup__title');
-const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
+// Массив изначальных мест
+const initialPlaces = [
+  {
+    title: 'Канада, Озеро Морейн',
+    image:
+      'https://images.unsplash.com/photo-1677530248517-ee23fb4150ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  },
+  {
+    title: 'Токио, Япония',
+    image:
+      'https://images.unsplash.com/photo-1677529461522-b2a94a2a3a08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  },
+  {
+    title: 'Живописный мост, Москва, Россия',
+    image:
+      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1333&q=80',
+  },
+  {
+    title: 'Накано, Токио, Япония',
+    image:
+      'https://images.unsplash.com/photo-1677350785705-1a5a0bb00587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  },
+  {
+    title: 'Торонто, Канада',
+    image:
+      'https://images.unsplash.com/photo-1677253171049-8cf508015e99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  },
+  {
+    title: 'Москва, Россия',
+    image:
+      'https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  },
+];
+// Селекторы и классы валидации
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};
+// Экзепляры класса валидации
+const profileFormValidator = new FormValidator(profilePopUpForm, config);
+const addFormValidator = new FormValidator(addingPopUpForm, config);
 
-// Обработка нововведенных даных
+// Добавление карточек в секцию
+initialPlaces.forEach(function (placeItem) {
+  const placesContent = new Place(placeItem, placeTemplate, openPopUp);
+  places.prepend(placesContent.createPlace());
+});
+
+// Открытие попапов
+function openPopUp(popUp) {
+  popUp.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopUpByEsc);
+}
+
+// Обработка нововведенных даных профиля
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = profilePopUpName.value;
@@ -35,44 +97,22 @@ function handleProfileFormSubmit(evt) {
   closePopUp(profilePopUp);
 }
 
-// Заполнение инпутов данными профиля
+// Заполнение полей данными профиля
 profilePopUpName.value = profileName.textContent;
 profilePopUpDescription.value = profileDescription.textContent;
 
-// Создание карточки
-function createPlace(place) {
-  const placeTemplateCopy = placeTemplate.cloneNode(true);
-  const placeImage = placeTemplateCopy.querySelector('.place__image');
-  const urnButton = placeTemplateCopy.querySelector('.place__urn-button');
-  const placeTitle = placeTemplateCopy.querySelector('.place__title');
-  const likeButton = placeTemplateCopy.querySelector('.place__like-button');
-  placeImage.setAttribute('src', place.image);
-  placeImage.setAttribute('alt', place.title);
-  placeTitle.textContent = place.title;
-  placeImage.addEventListener('click', openPopUpImage);
-  urnButton.addEventListener('click', deletePlace);
-  likeButton.addEventListener('click', toggleLike);
-  return placeTemplateCopy;
-}
-
-function addPlaces(item) {
-  const place = createPlace(item);
-  places.prepend(place);
-}
-initialPlaces.forEach(addPlaces);
-
-// Закрытие попапа на "Escape"
-function closePopUpByEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopUp = document.querySelector('.popup_opened');
-    closePopUp(openedPopUp);
-  }
-}
-
-// Открытие попапов
-function openPopUp(popUp) {
-  popUp.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopUpByEsc);
+// Создание новых карточек
+function createNewPlace(evt) {
+  evt.preventDefault();
+  const arrayNewPlaces = {
+    image: addingInputLink.value,
+    title: addingInputTitle.value,
+  };
+  const placesContent = new Place(arrayNewPlaces, placeTemplate, openPopUp);
+  places.prepend(placesContent.createPlace());
+  evt.target.reset();
+  addFormValidator.disableButton();
+  closePopUp(addingPopUp);
 }
 
 // Закрытие попапов
@@ -90,46 +130,26 @@ popUpList.forEach(function (popUp) {
   });
 });
 
-// Создание новых карточек
-function createNewPlace(evt) {
-  evt.preventDefault();
-  const arrayNewPlaces = {
-    image: addingInputLink.value,
-    title: addingInputTitle.value,
-  };
-  addPlaces(arrayNewPlaces);
-  evt.target.reset();
-  disableButton(addingSubmitButton, config);
-  closePopUp(addingPopUp);
-}
-
-// Лайк мест
-function toggleLike(evt) {
-  evt.target.classList.toggle('place__like-button_painted');
-}
-
-// Открытие попапа изображения
-function openPopUpImage(evt) {
-  openPopUp(imagePopup);
-  imagePopupImage.setAttribute('src', evt.target.getAttribute('src'));
-  imagePopupImage.setAttribute('alt', evt.target.getAttribute('alt'));
-  const place = evt.target.closest('.place');
-  imagePopupTitle.textContent = evt.target.getAttribute('alt');
-}
-
-// Удаление мест
-function deletePlace(evt) {
-  const deletedPlace = evt.target.closest('.place');
-  deletedPlace.remove();
+// Закрытие попапа на "Escape"
+function closePopUpByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.popup_opened');
+    closePopUp(openedPopUp);
+  }
 }
 
 // Слушатели "профиль" попап
 profileEditButton.addEventListener('click', function () {
   openPopUp(profilePopUp);
 });
-profilePopUpForm.addEventListener('submit', handleProfileFormSubmit);
+profilePopUp.addEventListener('submit', handleProfileFormSubmit);
+
 // Слушатели "добавить" попап
 profileAddButton.addEventListener('click', function () {
   openPopUp(addingPopUp);
 });
 addingPopUp.addEventListener('submit', createNewPlace);
+
+// Включение валидации форм
+profileFormValidator.enableValidation();
+addFormValidator.enableValidation();

@@ -9,6 +9,7 @@
 - Адаптивность и респонсивность.
 - Валидация форм.
 - Принципы работы с DOM с помощью нативного JavaScript.
+- ООП.
 
 ## GitHub Pages: https://mazouraw.github.io/mesto/
 
