@@ -1,4 +1,4 @@
-import { imagePopup, imagePopupImage, imagePopupTitle } from './index.js';
+import { imagePopup, imagePopupImage, imagePopupTitle } from '../utils/constants.js';
 
 export class Card {
   constructor(array, template, handleImageClick) {
@@ -17,7 +17,7 @@ export class Card {
   }
 
   // Создание карточки
-  createPlace() {
+  createPlace(newCard) {
     this._content = this._getTemplate();
 
     this._placeImage = this._content.querySelector('.place__image');
@@ -31,15 +31,6 @@ export class Card {
     this._setEventListeners();
 
     return this._content;
-  }
-
-  // Открытие попапа изображения
-  _openPopUpImage() {
-    this._handleImageClick(imagePopup);
-
-    imagePopupImage.src = this._image;
-    imagePopupImage.alt = this._title;
-    imagePopupTitle.textContent = this._title;
   }
 
   // Лайк мест
@@ -56,7 +47,7 @@ export class Card {
   // Установка слушателей
   _setEventListeners() {
     this._placeImage.addEventListener('click', () => {
-      this._openPopUpImage();
+      this._handleImageClick(this._image, this._title);
     });
 
     this._urnButton.addEventListener('click', () => {
