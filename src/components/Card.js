@@ -1,5 +1,3 @@
-import { imagePopup, imagePopupImage, imagePopupTitle } from '../utils/constants.js';
-
 export class Card {
   constructor(array, template, handleImageClick) {
     this._image = array.link;

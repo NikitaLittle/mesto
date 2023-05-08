@@ -1,15 +1,11 @@
 // Объекты профиля документа
 const profileEditButton = document.querySelector('.profile__edit-button');
-const usernameSelector = '.profile__name';
 const profileName = document.querySelector('.profile__name');
-const bioSelector = '.profile__description';
 const profileDescription = document.querySelector('.profile__description');
 const profileAddButton = document.querySelector('.profile__add-button');
 // Объекты мест
-const placesSelector = '.places';
 const placeTemplate = document.querySelector('.place__template').content;
 // Объекты "профиль" попап
-const profilePopupSelector = '.profile-popup';
 const profilePopUp = document.querySelector('.profile-popup');
 const profilePopUpForm = profilePopUp.querySelector('[name="profileForm"]');
 const profilePopUpName = profilePopUp.querySelector('.profile-popup__input_field_name');
@@ -20,11 +16,6 @@ const addingPopUp = document.querySelector('.adding-popup');
 const addingPopUpForm = addingPopUp.querySelector('[name="addForm"]');
 const addingInputTitle = addingPopUp.querySelector('.adding-popup__input_field_title');
 const addingInputLink = addingPopUp.querySelector('.adding-popup__input_field_link');
-// Объекты "изображение" попап
-const imagePopupSelector = '.image-popup';
-const imagePopup = document.querySelector('.image-popup');
-const imagePopupImage = imagePopup.querySelector('.image-popup__image');
-const imagePopupTitle = imagePopup.querySelector('.image-popup__title');
 // Массив изначальных мест
 const initialPlaces = [
   {
@@ -64,14 +55,10 @@ const config = {
 
 export {
   profileEditButton,
-  usernameSelector,
   profileName,
-  bioSelector,
   profileDescription,
   profileAddButton,
-  placesSelector,
   placeTemplate,
-  profilePopupSelector,
   profilePopUpForm,
   profilePopUpName,
   profilePopUpDescription,
@@ -80,10 +67,6 @@ export {
   addingPopUpForm,
   addingInputTitle,
   addingInputLink,
-  imagePopupSelector,
-  imagePopup,
-  imagePopupImage,
-  imagePopupTitle,
   initialPlaces,
   config,
 };

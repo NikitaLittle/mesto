@@ -4,7 +4,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  display: none;
+  display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -14,5 +14,5 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: visibility 0.3s, opacity 0.3s linear;
+  transition: visibility 0.2s, opacity 0.2s ease-in;
 }

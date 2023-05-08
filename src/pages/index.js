@@ -6,21 +6,14 @@ import { FormValidator } from '../components/FormValidatior.js';
 import {
   config,
   profilePopUpForm,
-  addingPopupSelector,
-  addingInputTitle,
   initialPlaces,
   placeTemplate,
-  placesSelector,
-  addingInputLink,
   profileAddButton,
   profileEditButton,
-  profilePopupSelector,
-  imagePopupSelector,
   addingPopUpForm,
-  usernameSelector,
-  bioSelector,
+  profilePopUpName,
+  profilePopUpDescription,
 } from '../utils/constants';
-import Popup from '../components/Popup';
 import PopupWithImage from '../components/PopupWithImage';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
@@ -29,71 +22,66 @@ import PopupWithForm from '../components/PopupWithForm';
 const profileFormValidator = new FormValidator(profilePopUpForm, config);
 const addingFormValidator = new FormValidator(addingPopUpForm, config);
 
-// Экземпляр "профиль" попапа
-const profilePopup = new Popup(profilePopupSelector);
-
-// Экземпляр "редактировать" попапа
-const addingPopup = new Popup(addingPopupSelector);
-
 // Экземпляр информации пользователя
-const userInfo = new UserInfo(usernameSelector, bioSelector);
+const userInfo = new UserInfo('.profile__name', '.profile__description');
 
 // Экземпляр формы профиля
-const profilePopupWithForm = new PopupWithForm(profilePopupSelector, (data) => {
+const profilePopupWithForm = new PopupWithForm('.profile-popup', (data) => {
   userInfo.setUserInfo(data);
-  profileFormValidator.disableButton();
 });
 
 // Экземлпяр "увеличенное изображение" попапа
-const popupWithImage = new PopupWithImage(imagePopupSelector);
+const popupWithImage = new PopupWithImage('.image-popup', '.image-popup__image', '.image-popup__title');
+
+// Функция заполянения данных попапа изображения
 function handleCardClick(image, title) {
   popupWithImage.open(image, title);
 }
 
-// Экземпляр секция карточек
+// Функция создания новой карточки
+function createCard(newCard) {
+  const card = new Card(newCard, placeTemplate, handleCardClick);
+  const cardElement = card.createPlace();
+
+  return cardElement;
+}
+
+// Экземпляр секции карточек
 const section = new Section(
   {
     items: initialPlaces,
     renderer: function (item) {
-      const card = new Card(item, placeTemplate, handleCardClick);
-      const cardElement = card.createPlace();
-      section.addItem(cardElement);
+      section.addItem(createCard(item));
     },
   },
-  placesSelector
+  '.places'
 );
 
 // Экземлпяр формы "добавить карточку"
-const addingPopupForm = new PopupWithForm(addingPopupSelector, (evt) => {
+const addingPopupWithForm = new PopupWithForm('.adding-popup', (data) => {
   const arrayNewPlace = {
-    link: addingInputLink.value,
-    name: addingInputTitle.value,
+    link: data.name,
+    name: data.link,
   };
 
-  const card = new Card(arrayNewPlace, placeTemplate, handleCardClick);
-  const cardElement = card.createPlace();
-
-  section.addItem(cardElement);
-  addingFormValidator.disableButton();
-  addingPopupForm.close();
+  section.addItem(createCard(arrayNewPlace));
+  addingPopupWithForm.close();
 });
 
-// Слушатель "добавить" кнопки
+// Слушатель кнопки "добавить карточку"
 profileAddButton.addEventListener('click', function () {
-  addingPopup.open();
+  addingPopupWithForm.open();
 });
 
-// Слушатель "редактировать" кнопки
+// Слушатель кнопки "редактировать или профиль"
 profileEditButton.addEventListener('click', function () {
-  profilePopup.open();
+  const profileData = userInfo.getUserInfo();
+  profilePopUpName.value = profileData.username;
+  profilePopUpDescription.value = profileData.bio;
+  profilePopupWithForm.open();
+  profileFormValidator.disableButton();
   userInfo.setUserInfo(userInfo.getUserInfo());
 });
-
-profilePopupWithForm.setEventListeners();
-profilePopup.setEventListeners();
-addingPopup.setEventListeners();
-addingPopupForm.setEventListeners();
-popupWithImage.setEventListeners();
 
 // Обработка карточек
 section.rendererItems();
@@ -101,3 +89,7 @@ section.rendererItems();
 // Включение валидации форм
 profileFormValidator.enableValidation();
 addingFormValidator.enableValidation();
+
+profilePopupWithForm.setEventListeners();
+addingPopupWithForm.setEventListeners();
+popupWithImage.setEventListeners();
