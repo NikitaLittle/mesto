@@ -60,8 +60,8 @@ const section = new Section(
 // Экземлпяр формы "добавить карточку"
 const addingPopupWithForm = new PopupWithForm('.adding-popup', (data) => {
   const arrayNewPlace = {
-    link: data.name,
-    name: data.link,
+    link: data.link,
+    name: data.name,
   };
 
   section.addItem(createCard(arrayNewPlace));
@@ -70,16 +70,17 @@ const addingPopupWithForm = new PopupWithForm('.adding-popup', (data) => {
 
 // Слушатель кнопки "добавить карточку"
 profileAddButton.addEventListener('click', function () {
+  addingFormValidator.disableButton();
   addingPopupWithForm.open();
 });
 
-// Слушатель кнопки "редактировать или профиль"
+// Слушатель кнопки "редактировать профиль"
 profileEditButton.addEventListener('click', function () {
+  profilePopupWithForm.open();
+  profileFormValidator.disableButton();
   const profileData = userInfo.getUserInfo();
   profilePopUpName.value = profileData.username;
   profilePopUpDescription.value = profileData.bio;
-  profilePopupWithForm.open();
-  profileFormValidator.disableButton();
   userInfo.setUserInfo(userInfo.getUserInfo());
 });
 

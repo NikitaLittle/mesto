@@ -23,7 +23,7 @@ export class Card {
     this._likeButton = this._content.querySelector('.place__like-button');
 
     this._placeImage.src = this._image;
-    this._content.querySelector('.place__image').alt = this._title;
+    this._placeImage.alt = this._title;
     this._content.querySelector('.place__title').textContent = this._title;
 
     this._setEventListeners();
