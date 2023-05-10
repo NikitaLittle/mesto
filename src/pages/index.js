@@ -28,6 +28,7 @@ const userInfo = new UserInfo('.profile__name', '.profile__description');
 // Экземпляр формы профиля
 const profilePopupWithForm = new PopupWithForm('.profile-popup', (data) => {
   userInfo.setUserInfo(data);
+  console.log(data);
 });
 
 // Экземлпяр "увеличенное изображение" попапа
@@ -79,7 +80,7 @@ profileEditButton.addEventListener('click', function () {
   profilePopupWithForm.open();
   profileFormValidator.disableButton();
   const profileData = userInfo.getUserInfo();
-  profilePopUpName.value = profileData.username;
+  profilePopUpName.value = profileData.userName;
   profilePopUpDescription.value = profileData.bio;
   userInfo.setUserInfo(userInfo.getUserInfo());
 });
