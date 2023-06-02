@@ -1,4 +1,4 @@
-.places {
+.cards {
   max-width: 880px;
   margin: 51px auto 0;
   display: -ms-grid;
@@ -8,13 +8,13 @@
 }
 
 @media (max-width: 930px) {
-  .places {
+  .cards {
     max-width: 581px;
   }
 }
 
 @media (max-width: 620px) {
-  .places {
+  .cards {
     max-width: 282px;
   }
 }

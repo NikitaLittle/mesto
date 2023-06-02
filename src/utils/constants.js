@@ -5,7 +5,7 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const profileAddButton = document.querySelector('.profile__add-button');
 // Объекты мест
-const placeTemplate = document.querySelector('.place__template').content;
+const cardTemplate = document.querySelector('.card__template').content;
 // Объекты "профиль" попап
 const profilePopUp = document.querySelector('.profile-popup');
 const profilePopUpForm = profilePopUp.querySelector('[name="profileForm"]');
@@ -24,7 +24,7 @@ const avatarPopupForm = avatarPopup.querySelector('[name="updateAvatarForm"]');
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
+  submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
@@ -36,7 +36,7 @@ export {
   profileName,
   profileDescription,
   profileAddButton,
-  placeTemplate,
+  cardTemplate,
   profilePopUpForm,
   profilePopUpName,
   profilePopUpDescription,

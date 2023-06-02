@@ -6,7 +6,7 @@ import { FormValidator } from '../components/FormValidatior.js';
 import {
   config,
   profilePopUpForm,
-  placeTemplate,
+  cardTemplate,
   profileAddButton,
   profileEditButton,
   addingPopUpForm,
@@ -20,10 +20,20 @@ import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import Api from '../components/Api';
 import PopupWithQuestion from '../components/PopupWithQuestion';
-
 let userId;
 
-const section = new Section({}, '.places');
+const section = new Section({}, '.cards');
+
+// Экземлпяр "увеличенное изображение" попапа
+const popupWithImage = new PopupWithImage('.image-popup', '.image-popup__image', '.image-popup__title');
+
+// Экземпляр информации пользователя
+const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
+
+// Экзепляры класса валидации
+const profileFormValidator = new FormValidator(profilePopUpForm, config);
+const addingFormValidator = new FormValidator(addingPopUpForm, config);
+const avatarFormValidator = new FormValidator(avatarPopupForm, config);
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
@@ -32,6 +42,53 @@ const api = new Api({
     'Content-Type': 'application/json',
   },
 });
+
+api.getProfile().then((res) => {
+  userInfo.setUserInfo({ name: res.name, about: res.about, avatarLink: res.avatar });
+  userId = res._id;
+});
+
+api.getInitialCards().then((cardList) => {
+  const section = new Section(
+    {
+      items: cardList,
+      renderer: (card) => {
+        section.addItem(createCard({ link: card.link, name: card.name, likes: card.likes, cardId: card._id, ownerId: card.owner._id }));
+      },
+    },
+    '.cards'
+  );
+  section.rendererItems();
+});
+
+// Функция создания новой карточки
+function createCard(data) {
+  const card = new Card(
+    data,
+    cardTemplate,
+    (image, title) => {
+      popupWithImage.open(image, title);
+    },
+    () => {
+      questionPopup.open(data.cardId, card.deleteCard.bind(card));
+    },
+    (cardId) => {
+      if (card.isLikes()) {
+        api.deleteLikeCard(cardId).then((res) => {
+          card.setLikes(res.likes);
+        });
+      } else {
+        api.putLikeCard(cardId).then((res) => {
+          card.setLikes(res.likes);
+        });
+      }
+    },
+    userId
+  );
+  const cardElement = card.createCard();
+
+  return cardElement;
+}
 
 // Экземпляр формы профиля
 const profilePopup = new PopupWithForm('.profile-popup', (data) => {
@@ -73,33 +130,6 @@ const questionPopup = new PopupWithQuestion('.question-popup', (cardId, deleteCa
   });
 });
 
-// Функция создания новой карточки
-function createCard(data) {
-  const card = new Card(
-    data,
-    placeTemplate,
-    handleCardClick,
-    () => {
-      questionPopup.open(data.cardId, card.deletePlace.bind(card));
-    },
-    (cardId) => {
-      if (card.isLikes()) {
-        api.deleteLikeCard(cardId).then((res) => {
-          card.setLikes(res.likes);
-        });
-      } else {
-        api.putLikeCard(cardId).then((res) => {
-          card.setLikes(res.likes);
-        });
-      }
-    },
-    userId
-  );
-  const cardElement = card.createPlace();
-
-  return cardElement;
-}
-
 const avatarPopup = new PopupWithForm('.update-avatar-popup', (avatar) => {
   avatarPopup.loadProcess({ isLoad: true, status: 'Сохранение...' });
   api
@@ -116,40 +146,6 @@ profileAvatarButton.addEventListener('click', () => {
   avatarFormValidator.disableButton();
   avatarPopup.open();
 });
-
-api.getProfile().then((res) => {
-  userInfo.setUserInfo({ name: res.name, about: res.about, avatarLink: res.avatar });
-  userId = res._id;
-});
-
-api.getInitialCards().then((cardList) => {
-  const section = new Section(
-    {
-      items: cardList,
-      renderer: (card) => {
-        section.addItem(createCard({ link: card.link, name: card.name, likes: card.likes, cardId: card._id, ownerId: card.owner._id }));
-      },
-    },
-    '.places'
-  );
-  section.rendererItems();
-});
-
-// Экзепляры класса валидации
-const profileFormValidator = new FormValidator(profilePopUpForm, config);
-const addingFormValidator = new FormValidator(addingPopUpForm, config);
-const avatarFormValidator = new FormValidator(avatarPopupForm, config);
-
-// Экземпляр информации пользователя
-const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__image');
-
-// Экземлпяр "увеличенное изображение" попапа
-const popupWithImage = new PopupWithImage('.image-popup', '.image-popup__image', '.image-popup__title');
-
-// Функция заполянения данных попапа изображения
-function handleCardClick(image, title) {
-  popupWithImage.open(image, title);
-}
 
 // Слушатель кнопки "добавить карточку"
 profileAddButton.addEventListener('click', function () {
