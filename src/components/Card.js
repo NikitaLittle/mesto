@@ -3,16 +3,16 @@ export class Card {
     this._image = data.link;
     this._alt = data.name;
     this._title = data.name;
-    this._cardId = data.cardId;
+    this._cardId = data._id;
     this._likes = data.likes;
-    this._ownerId = data.ownerId;
+    this._ownerId = data.owner._id;
 
-    this._userId = userId;
     this._template = template;
     this._content = this._getTemplate();
     this._handleImageClick = handleImageClick;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
+    this._userId = userId;
   }
 
   // Получение шаблона

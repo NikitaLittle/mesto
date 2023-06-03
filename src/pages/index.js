@@ -43,21 +43,20 @@ const api = new Api({
   },
 });
 
-api.getProfile().then((res) => {
-  userInfo.setUserInfo({ name: res.name, about: res.about, avatarLink: res.avatar });
-  userId = res._id;
-});
+Promise.all([api.getProfile(), api.getInitialCards()]).then(([profile, cardList]) => {
+  userInfo.setUserInfo(profile);
+  userId = profile._id;
 
-api.getInitialCards().then((cardList) => {
   const section = new Section(
     {
       items: cardList,
       renderer: (card) => {
-        section.addItem(createCard({ link: card.link, name: card.name, likes: card.likes, cardId: card._id, ownerId: card.owner._id }));
+        section.addItem(createCard(card));
       },
     },
     '.cards'
   );
+
   section.rendererItems();
 });
 
@@ -70,21 +69,28 @@ function createCard(data) {
       popupWithImage.open(image, title);
     },
     () => {
-      questionPopup.open(data.cardId, card.deleteCard.bind(card));
+      questionPopup.open(data._id, card.deleteCard.bind(card));
     },
     (cardId) => {
       if (card.isLikes()) {
-        api.deleteLikeCard(cardId).then((res) => {
-          card.setLikes(res.likes);
-        });
+        api
+          .deleteLikeCard(cardId)
+          .then((res) => {
+            card.setLikes(res.likes);
+          })
+          .catch(console.log);
       } else {
-        api.putLikeCard(cardId).then((res) => {
-          card.setLikes(res.likes);
-        });
+        api
+          .putLikeCard(cardId)
+          .then((res) => {
+            card.setLikes(res.likes);
+          })
+          .catch(console.log);
       }
     },
     userId
   );
+
   const cardElement = card.createCard();
 
   return cardElement;
@@ -95,10 +101,12 @@ const profilePopup = new PopupWithForm('.profile-popup', (data) => {
   profilePopup.loadProcess({ isLoad: true, status: 'Сохранение...' });
 
   api
-    .editProfile({ name: data.name, about: data.about })
+    .editProfile(data)
     .then((res) => {
-      userInfo.setUserInfo({ name: res.name, about: res.about, avatarLink: res.avatar });
+      userInfo.setUserInfo(res);
+      profilePopup.close();
     })
+    .catch(console.log)
     .finally(() => {
       profilePopup.loadProcess({ isLoad: false });
     });
@@ -115,19 +123,23 @@ const addingPopup = new PopupWithForm('.adding-popup', (data) => {
   api
     .addNewCard(newCardData)
     .then((res) => {
-      section.addItem(createCard({ name: res.name, link: res.link, likes: res.likes, cardId: res._id, ownerId: res.owner._id }));
+      section.addItem(createCard(res));
+      addingPopup.close();
     })
+    .catch(console.log)
     .finally(() => {
       addingPopup.loadProcess({ isLoad: false });
     });
-
-  addingPopup.close();
 });
 
 const questionPopup = new PopupWithQuestion('.question-popup', (cardId, deleteCard) => {
-  api.deleteCard(cardId).then((res) => {
-    deleteCard();
-  });
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      deleteCard();
+      questionPopup.close();
+    })
+    .catch(console.log);
 });
 
 const avatarPopup = new PopupWithForm('.update-avatar-popup', (avatar) => {
@@ -135,8 +147,10 @@ const avatarPopup = new PopupWithForm('.update-avatar-popup', (avatar) => {
   api
     .updateAvatar(avatar.link)
     .then((res) => {
-      userInfo.setUserInfo({ name: res.name, about: res.about, avatarLink: res.avatar });
+      userInfo.setUserInfo(res);
+      avatarPopup.close();
     })
+    .catch(console.log)
     .finally(() => {
       avatarPopup.loadProcess({ isLoad: false });
     });

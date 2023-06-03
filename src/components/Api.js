@@ -4,32 +4,28 @@ export default class Api {
     this._headers = headers;
   }
 
+  _checkResStatus(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(res.status);
+    }
+  }
+
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   editProfile({ name, about }) {
@@ -37,15 +33,9 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name, about }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   addNewCard({ name, link }) {
@@ -53,60 +43,36 @@ export default class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name, link }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   putLikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   deleteLikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 
   updateAvatar(avatarLink) {
@@ -114,14 +80,8 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ avatar: avatarLink }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-      })
-      .catch(console.log);
+    }).then((res) => {
+      return this._checkResStatus(res);
+    });
   }
 }
