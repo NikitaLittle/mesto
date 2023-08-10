@@ -12,4 +12,6 @@
 - API запросы с использованием Fetch.
 - Webpack (сборка проекта).
 
-## GitHub Pages: https://nikitalittle.github.io/mesto/
+---
+
+GitHub Pages: https://nikitalittle.github.io/mesto/
