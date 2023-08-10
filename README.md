@@ -13,5 +13,3 @@
 - Webpack (сборка проекта).
 
 ## GitHub Pages: https://nikitalittle.github.io/mesto/
-
-© Маленький Никита Денисович
