@@ -14,4 +14,4 @@
 
 ---
 
-GitHub Pages: https://nikitalittle.github.io/mesto/
+https://nikitalittle.github.io/mesto/
