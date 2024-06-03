@@ -1,6 +1,6 @@
 # Веб-приложение, фотохостинг "Место".
 Социальный интернет-сервис, фотохостинг, позволяющий пользователям добавлять в режиме онлайн изображения, делиться фотографиями мест, просматривать фотографии других пользователей, ставить лайки, редактировать профиль.<br><br>
-[Ссылка на GH-Pages](https://nikitalittle.github.io/mesto/) | [Ссылка на макет Figma](https://www.figma.com/file/5S2WSbEFL6awjVWJ0NWL8Q/Sprint-3_-Russia-_-desktop-mobile?node-id=28503%3A0)
+[Ссылка на GH-Pages](https://nikitalittle.github.io/mesto/) | [Ссылка на макет Figma]([https://www.figma.com/file/5S2WSbEFL6awjVWJ0NWL8Q/Sprint-3_-Russia-_-desktop-mobile?node-id=28503%3A0](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1))
 ![image](https://github.com/NikitaLittle/mesto/assets/120175534/1d5991a1-8aee-4ae4-99fc-e3f7183e790e)
 ## Что сделал:
 - организовал файловую структуру и именование классов по методологии БЭМ;
