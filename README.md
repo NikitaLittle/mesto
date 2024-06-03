@@ -15,7 +15,7 @@
 - JavaScript(ES6+), Webpack(5.79), ООП;
 ## Инструкция по запуску:
 1. Склонируйте этот репозиторий в удобное для вас место:<br>
-<code>git clone https://github.com/endjoyer/movies-explorer-frontend</code>
+<code>git clone https://github.com/NikitaLittle/mesto.git</code>
 2. Установите все зависимости:<br>
 <code>yarn или npm install</code>
 3. Запустите проект:<br>
